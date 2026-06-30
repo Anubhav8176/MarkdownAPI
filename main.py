@@ -3,6 +3,8 @@ import markdown
 from fastapi import FastAPI, UploadFile, File, HTTPException, Depends
 from database.database import get_db, Base, db_engine
 from models.NoteData import MarkdownNote
+import language_tool_python
+from utilities.text_cleaner import strip_markdown
 
 app = FastAPI()
 
@@ -71,6 +73,17 @@ def get_markdown(id: str, db = Depends(get_db)):
 	return html_markdown_note
 
 
-@app.post("/check_grammer")
+@app.post("/check_grammar")
 async def check_grammer(file: UploadFile = File(...)):
 	validate_file(file=file)
+
+	content = await file.read()
+
+	formatted_content = strip_markdown(content.decode("utf-8"))
+
+	with language_tool_python.LanguageTool("en-US") as tool:
+		matches = tool.check(formatted_content)
+
+	return {
+		"matches": matches
+	}
