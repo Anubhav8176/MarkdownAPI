@@ -2,8 +2,6 @@
 
 A backend REST API for uploading, storing, retrieving, rendering, and grammar-checking Markdown notes — built with **FastAPI**, **SQLAlchemy**, and **Python-Markdown**.
 
-This project is built by following the [Markdown Note-Taking App](https://roadmap.sh/projects/markdown-note-taking-app) project idea from [roadmap.sh](https://roadmap.sh).
-
 ## About
 
 MarkdownAPI lets users upload `.md` files, persist them to a database, fetch them back as raw content or rendered HTML, list all saved notes, and run a grammar check on the note content. It's a small, focused FastAPI service that demonstrates file upload handling, validation, database persistence with SQLAlchemy, Markdown-to-HTML conversion, and integration with a third-party grammar-checking tool.
@@ -113,10 +111,6 @@ curl "http://127.0.0.1:8000/get_markdown/{note_id}"
 curl -X POST "http://127.0.0.1:8000/check_grammar" \
   -F "file=@notes.md;type=text/markdown"
 ```
-
-## Acknowledgements
-
-This project was built as part of the [Markdown Note-Taking App](https://roadmap.sh/projects/markdown-note-taking-app) backend project series on [roadmap.sh](https://roadmap.sh/).
 
 ## Author
 
